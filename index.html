@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하루재 북클럽</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #f5f3ef;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+
+    /* ── Scroll Animation ── */
+    .animate {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .animate.visible { opacity: 1; transform: translateY(0); }
+    .animate-delay-1 { transition-delay: 0.1s; }
+    .animate-delay-2 { transition-delay: 0.2s; }
+    .animate-delay-3 { transition-delay: 0.3s; }
+    .animate-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Announcement Banner ── */
+    #banner {
+      background: #1a1a1a;
+      color: #f5f3ef;
+      text-align: center;
+      padding: 11px 48px;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    #banner a {
+      color: #c8a96e;
+      text-decoration: none;
+      border-bottom: 1px solid #c8a96e;
+    }
+
+    .banner-close {
+      position: absolute;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .banner-close:hover { color: #f5f3ef; }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(245, 243, 239, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e0dbd3;
+      height: 60px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #1a1a1a; }
+    .nav-cta { background: #1a1a1a; color: #f5f3ef !important; padding: 9px 20px; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #1a1a1a;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: #f5f3ef;
+      border-bottom: 1px solid #e0dbd3;
+      padding: 16px 24px;
+      z-index: 199;
+    }
+
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block;
+      font-size: 15px;
+      color: #333;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* ── Section Base ── */
+    section { padding: 120px 48px; }
+
+    .inner { max-width: 1000px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 52px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #1a1a1a;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-size: 52px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 32px;
+      max-width: 680px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: #666;
+      max-width: 480px;
+      line-height: 2;
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #f5f3ef;
+      font-size: 14px;
+      padding: 15px 36px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: opacity 0.2s, transform 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .hero-cta:hover { opacity: 0.8; transform: translateY(-2px); }
+
+    .hero-stat {
+      margin-top: 80px;
+      display: flex;
+      gap: 60px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 1s forwards;
+    }
+
+    .stat-num {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+
+    .stat-label { font-size: 12px; color: #999; letter-spacing: 0.05em; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Books ── */
+    #books { background: #f5f3ef; }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+    }
+
+    .book-card {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .book-card:hover { transform: translateY(-6px); }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #e0dbd3;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #bbb;
+      letter-spacing: 0.08em;
+      transition: background 0.3s;
+      overflow: hidden;
+    }
+
+    .book-cover img { width: 100%; height: 100%; object-fit: cover; }
+    .book-card:hover .book-cover { background: #d8d2ca; }
+
+    .book-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 5px;
+    }
+
+    .book-sub { font-size: 13px; color: #888; line-height: 1.6; }
+
+    /* ── Book Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open { display: flex; animation: fadeOverlay 0.3s ease; }
+
+    @keyframes fadeOverlay {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .modal-box {
+      background: #f5f3ef;
+      max-width: 640px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      animation: slideUp 0.3s ease;
+      position: relative;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-cover {
+      background: #e0dbd3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #bbb;
+      letter-spacing: 0.08em;
+      aspect-ratio: 3/4;
+    }
+
+    .modal-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+    .modal-body { padding: 36px; }
+
+    .modal-close {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover { color: #1a1a1a; }
+
+    .modal-tag {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .modal-author {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: #444;
+      line-height: 2;
+      margin-bottom: 24px;
+    }
+
+    .modal-meta {
+      font-size: 12px;
+      color: #aaa;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Philosophy ── */
+    #philosophy { background: #1a1a1a; color: #f5f3ef; }
+    #philosophy .section-tag { color: #555; }
+    #philosophy .section-title { color: #f5f3ef; border-bottom-color: #333; }
+
+    .philosophy-lead {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 64px;
+      color: #ddd;
+    }
+
+    .philosophy-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+
+    .phil-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .phil-text { font-size: 15px; color: #888; line-height: 2; }
+
+    /* ── About ── */
+    #about { background: #eee9e2; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: #ddd8d0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #bbb;
+      letter-spacing: 0.08em;
+      overflow: hidden;
+    }
+
+    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-name { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .about-role { font-size: 13px; color: #888; line-height: 1.8; margin-bottom: 36px; }
+    .about-body { font-size: 15px; color: #444; line-height: 2.1; }
+
+    .about-quote {
+      margin-top: 32px;
+      padding: 20px 24px;
+      border-left: 3px solid #1a1a1a;
+      background: #e6e0d8;
+    }
+
+    .about-quote p { font-size: 14px; color: #555; line-height: 1.9; }
+
+    /* ── Reviews ── */
+    #reviews { background: #f5f3ef; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .review-card {
+      background: #fff;
+      padding: 28px;
+      border: 1px solid #e8e3dc;
+    }
+
+    .review-stars { font-size: 14px; color: #c8a96e; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-book { font-size: 11px; letter-spacing: 0.1em; color: #aaa; text-transform: uppercase; margin-bottom: 12px; }
+    .review-text { font-size: 14px; color: #444; line-height: 1.9; margin-bottom: 20px; }
+    .review-author { font-size: 12px; color: #999; }
+
+    /* ── Forms ── */
+    .forms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+    .form-box { background: #fff; padding: 36px; border: 1px solid #e8e3dc; }
+
+    .form-section-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-full { grid-column: 1 / -1; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 12px; color: #888; letter-spacing: 0.05em; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: #f5f3ef;
+      border: 1px solid #e0dbd3;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #1a1a1a;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: #1a1a1a; }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      background: #1a1a1a;
+      color: #f5f3ef;
+      border: none;
+      padding: 14px 32px;
+      font-size: 14px;
+      font-family: inherit;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+
+    .form-submit:hover { opacity: 0.8; transform: translateY(-1px); }
+
+    .form-success {
+      display: none;
+      background: #eee9e2;
+      border: 1px solid #d0c9bf;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: #555;
+      margin-top: 16px;
+    }
+
+    /* ── FAQ ── */
+    #faq { background: #1a1a1a; color: #f5f3ef; }
+    #faq .section-tag { color: #555; }
+    #faq .section-title { color: #f5f3ef; border-bottom-color: #333; }
+
+    .faq-list { display: flex; flex-direction: column; }
+
+    .faq-item { border-bottom: 1px solid #2a2a2a; }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #f5f3ef;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-align: left;
+      padding: 24px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover { color: #ccc; }
+
+    .faq-icon {
+      font-size: 20px;
+      color: #555;
+      flex-shrink: 0;
+      transition: transform 0.3s, color 0.2s;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); color: #c8a96e; }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
+
+    .faq-answer p { font-size: 15px; color: #888; line-height: 2; }
+
+    /* ── Membership ── */
+    #membership { background: #f5f3ef; }
+
+    .membership-intro {
+      font-size: 15px;
+      color: #555;
+      max-width: 560px;
+      line-height: 2;
+      margin-bottom: 52px;
+      margin-top: -24px;
+    }
+
+    .membership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .mem-card {
+      padding: 40px;
+      border: 1px solid #ddd;
+      background: #fff;
+      transition: transform 0.3s;
+    }
+
+    .mem-card:hover { transform: translateY(-4px); }
+    .mem-card.featured { background: #1a1a1a; color: #f5f3ef; border-color: #1a1a1a; }
+
+    .mem-type { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; margin-bottom: 20px; }
+    .mem-card.featured .mem-type { color: #555; }
+
+    .mem-price { font-size: 36px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+    .mem-period { font-size: 13px; color: #aaa; margin-bottom: 36px; }
+    .mem-card.featured .mem-period { color: #555; }
+
+    .mem-list { list-style: none; margin-bottom: 40px; border-top: 1px solid #eee; }
+    .mem-card.featured .mem-list { border-top-color: #2a2a2a; }
+
+    .mem-list li {
+      font-size: 14px;
+      color: #555;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      gap: 12px;
+    }
+
+    .mem-card.featured .mem-list li { color: #aaa; border-bottom-color: #2a2a2a; }
+
+    .mem-list li::before { content: "—"; color: #ccc; flex-shrink: 0; }
+    .mem-card.featured .mem-list li::before { color: #444; }
+
+    .mem-btn {
+      display: block;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border: 1px solid #1a1a1a;
+      color: #1a1a1a;
+      transition: all 0.2s;
+    }
+
+    .mem-btn:hover { background: #1a1a1a; color: #f5f3ef; }
+    .mem-card.featured .mem-btn { background: #f5f3ef; border-color: #f5f3ef; color: #1a1a1a; }
+    .mem-card.featured .mem-btn:hover { opacity: 0.85; }
+
+    /* ── Newsletter ── */
+    #newsletter {
+      background: #eee9e2;
+      padding: 80px 48px;
+      text-align: center;
+    }
+
+    .newsletter-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .newsletter-desc {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 36px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #d0c9bf;
+      border-right: none;
+      padding: 14px 18px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #1a1a1a;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .newsletter-input:focus { border-color: #1a1a1a; }
+    .newsletter-input::placeholder { color: #bbb; }
+
+    .newsletter-btn {
+      background: #1a1a1a;
+      color: #f5f3ef;
+      border: 1px solid #1a1a1a;
+      padding: 14px 24px;
+      font-size: 14px;
+      font-family: inherit;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .newsletter-btn:hover { opacity: 0.8; }
+
+    .newsletter-success {
+      display: none;
+      font-size: 14px;
+      color: #666;
+      margin-top: 16px;
+    }
+
+    /* ── Footer ── */
+    footer { background: #1a1a1a; padding: 56px 48px; }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-logo { font-size: 16px; font-weight: 700; color: #f5f3ef; margin-bottom: 10px; }
+    .footer-copy { font-size: 12px; color: #444; }
+    .footer-tagline { font-size: 13px; color: #444; line-height: 1.9; text-align: right; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      section { padding: 80px 24px; }
+      nav { padding: 0 24px; }
+      #banner { padding: 10px 40px 10px 16px; font-size: 12px; text-align: left; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-title { font-size: 34px; }
+      .hero-stat { gap: 32px; flex-wrap: wrap; }
+      .stat-num { font-size: 24px; }
+
+      .books-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .modal-box { grid-template-columns: 1fr; }
+      .modal-cover { aspect-ratio: 2/1; }
+      .philosophy-cols { grid-template-columns: 1fr; gap: 32px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .forms-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .membership-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid #d0c9bf; border-bottom: none; }
+      .footer-inner { flex-direction: column; gap: 24px; align-items: flex-start; }
+      .footer-tagline { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Banner -->
+  <div id="banner">
+    <span>📖 2026 상반기 신간 출간 예정 — <a href="#books">도서 목록 보기</a></span>
+    <button class="banner-close" onclick="closeBanner()">×</button>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="mainNav">
+    <a href="#hero" class="nav-logo">하루재 북클럽</a>
+    <ul class="nav-links">
+      <li><a href="#books">책 소개</a></li>
+      <li><a href="#philosophy">출판사 철학</a></li>
+      <li><a href="#about">대표 소개</a></li>
+      <li><a href="#reviews">독자 후기</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#membership" class="nav-cta">멤버십 가입</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#books" onclick="closeMobile()">책 소개</a>
+    <a href="#philosophy" onclick="closeMobile()">출판사 철학</a>
+    <a href="#about" onclick="closeMobile()">대표 소개</a>
+    <a href="#reviews" onclick="closeMobile()">독자 후기</a>
+    <a href="#forms" onclick="closeMobile()">참여하기</a>
+    <a href="#faq" onclick="closeMobile()">FAQ</a>
+    <a href="#membership" onclick="closeMobile()">멤버십 가입</a>
+  </div>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="inner">
+      <div class="hero-label">하루재 북클럽</div>
+      <h1 class="hero-title">세계가 산에 대해<br>쌓아온 것들,<br>이제 한국어로.</h1>
+      <p class="hero-desc">산을 오르는 것만으로는 채워지지 않는 사람들을 위한 출판사.<br>국내 유일의 산서 전문 북클럽입니다.</p>
+      <a href="#membership" class="hero-cta">멤버십 알아보기</a>
+      <div class="hero-stat">
+        <div>
+          <div class="stat-num" data-count="27">0</div>
+          <div class="stat-label">출간 도서 (권)</div>
+        </div>
+        <div>
+          <div class="stat-num" data-count="1200">0</div>
+          <div class="stat-label">현재 회원 수 (명)</div>
+        </div>
+        <div>
+          <div class="stat-num" data-count="10">0</div>
+          <div class="stat-label">산서 전문 출판 (년)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 책 소개 -->
+  <section id="books">
+    <div class="inner">
+      <div class="section-tag animate">Books</div>
+      <h2 class="section-title animate">출간 도서</h2>
+      <div class="books-grid">
+        <div class="book-card animate animate-delay-1"
+          data-title="폴른 자이언츠"
+          data-author="Maurice Isserman, Stewart Weaver"
+          data-desc="히말라야 8000m급 14좌를 둘러싼 등반의 역사를 집대성한 책. 19세기부터 21세기까지 전 세계 산악인들의 도전과 좌절, 그리고 승리의 기록을 담았다."
+          data-year="출간 2018" data-lang="영어 번역">
+          <div class="book-cover">표지 이미지</div>
+          <div class="book-title">폴른 자이언츠</div>
+          <div class="book-sub">히말라야 등반의 역사</div>
+        </div>
+        <div class="book-card animate animate-delay-2"
+          data-title="에베레스트 정복"
+          data-author="John Hunt"
+          data-desc="1953년 인류 최초의 에베레스트 등정을 담은 오리지널 사진집. 원정대장 존 헌트가 직접 쓴 기록과 당시의 희귀한 사진들을 수록했다."
+          data-year="출간 2017" data-lang="영어 번역">
+          <div class="book-cover">표지 이미지</div>
+          <div class="book-title">에베레스트 정복</div>
+          <div class="book-sub">초등 당시의 오리지널 기록</div>
+        </div>
+        <div class="book-card animate animate-delay-3"
+          data-title="리카르도 캐신"
+          data-author="Riccardo Cassin"
+          data-desc="20세기 최고의 알피니스트 중 한 명인 리카르도 캐신의 50년 등반 인생. 워커 스퍼, 드류 필라 등 전설적인 루트를 개척한 그의 이야기를 담았다."
+          data-year="출간 2019" data-lang="이탈리아어 번역">
+          <div class="book-cover">표지 이미지</div>
+          <div class="book-title">리카르도 캐신</div>
+          <div class="book-sub">50년 등반 인생</div>
+        </div>
+        <div class="book-card animate animate-delay-1"
+          data-title="일본 여성 등산사"
+          data-author="—"
+          data-desc="메이지 시대부터 현대까지, 일본 여성 산악인들이 걸어온 길을 기록한 책. 여성과 산악 문화의 교차점을 조명한다."
+          data-year="출간 2020" data-lang="일본어 번역">
+          <div class="book-cover">표지 이미지</div>
+          <div class="book-title">일본 여성 등산사</div>
+          <div class="book-sub">여성 산악인의 기록</div>
+        </div>
+        <div class="book-card animate animate-delay-2"
+          data-title="중국 등산 운동사"
+          data-author="—"
+          data-desc="중국 근현대 산악 운동의 역사를 체계적으로 정리한 책. 중국 산악인들의 히말라야 도전과 자국 산악 문화의 발전을 다룬다."
+          data-year="출간 2021" data-lang="중국어 번역">
+          <div class="book-cover">표지 이미지</div>
+          <div class="book-title">중국 등산 운동사</div>
+          <div class="book-sub">중국 산악 운동의 역사</div>
+        </div>
+        <div class="book-card animate animate-delay-3"
+          data-title="그 외 도서"
+          data-author="하루재 북클럽"
+          data-desc="2015년 창간 이래 총 27권의 산서를 출간했습니다. 히말라야 원정 기록, 산악 문화사, 등반 에세이 등 다양한 산서를 만나보세요."
+          data-year="2015 —" data-lang="다수 언어 번역">
+          <div class="book-cover">+ 22권</div>
+          <div class="book-title">그 외 도서</div>
+          <div class="book-sub">2015년부터 총 27권 출간</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Book Modal -->
+  <div class="modal-overlay" id="bookModal" onclick="closeModal(event)">
+    <div class="modal-box">
+      <div class="modal-cover" id="modalCover">표지 이미지</div>
+      <div class="modal-body">
+        <button class="modal-close" onclick="closeModalBtn()">×</button>
+        <div class="modal-tag" id="modalLang"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-author" id="modalAuthor"></div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-meta" id="modalYear"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 출판사 철학 -->
+  <section id="philosophy">
+    <div class="inner">
+      <div class="section-tag animate">Philosophy</div>
+      <h2 class="section-title animate">출판사 철학</h2>
+      <p class="philosophy-lead animate">
+        산을 오르는 것만으로는 채워지지 않는 사람들이 있다.<br>
+        산의 역사, 사람, 철학을 알고 싶어 하는 사람들.<br>
+        하루재는 그런 사람들이 많아지는 것을 목표로 한다.
+      </p>
+      <div class="philosophy-cols">
+        <div class="animate animate-delay-1">
+          <div class="phil-label">우리가 하는 일</div>
+          <p class="phil-text">세계 산악 문화가 오래 쌓아온 것들을 한국 독자에게 처음으로 전달합니다. 번역이지만 단순한 소개가 아니라, 산악 문화로의 입문입니다.</p>
+        </div>
+        <div class="animate animate-delay-2">
+          <div class="phil-label">독자 경험</div>
+          <p class="phil-text">하루재의 책을 읽고 나면 다음번 산행이 조금 달라집니다. 그 변화가 조용히 쌓이면서, 산을 대하는 태도가 깊어집니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 대표 소개 -->
+  <section id="about">
+    <div class="inner">
+      <div class="section-tag animate">About</div>
+      <h2 class="section-title animate">대표 소개</h2>
+      <div class="about-grid">
+        <div class="animate">
+          <div class="about-photo">사진</div>
+        </div>
+        <div class="animate animate-delay-1">
+          <div class="about-name">변기태</div>
+          <div class="about-role">하루재 북클럽 대표 · 한국산악회 회장</div>
+          <p class="about-body">2015년부터 하루재 북클럽을 이끌며 총 27권의 산서를 출간했습니다. 고등학교 시절부터 40여 년간 산서를 수집해온 애서가로, 해외 원서를 포함해 5,000여 권의 산서를 소장하고 있습니다. 한국산서회 창립 멤버이며, 현재 한국산악회 회장을 역임하고 있습니다.</p>
+          <div class="about-quote">
+            <p>"다른 분야에서는 좋은 책이 많이 나오는데 유독 산서는 찾아보기 힘든 현실이 안타까웠다. 산서 읽기 붐을 일으켜 출판사들이 산서 출간에 의욕을 갖게 만드는 환경을 만들고 싶다."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 독자 후기 -->
+  <section id="reviews">
+    <div class="inner">
+      <div class="section-tag animate">Reviews</div>
+      <h2 class="section-title animate">독자 후기</h2>
+      <div class="reviews-grid">
+        <div class="review-card animate animate-delay-1">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-book">폴른 자이언츠</div>
+          <p class="review-text">"히말라야 등반의 역사를 이렇게 깊이 있게 다룬 책이 한국어로 나온 적이 없었다. 읽고 나서 산을 보는 눈이 달라졌다."</p>
+          <div class="review-author">— 김 ○○, 회원 3년차</div>
+        </div>
+        <div class="review-card animate animate-delay-2">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-book">리카르도 캐신</div>
+          <p class="review-text">"단순한 등반 기록이 아니라 한 인간의 이야기다. 산을 왜 오르는지에 대한 답을 이 책에서 찾았다."</p>
+          <div class="review-author">— 이 ○○, 회원 2년차</div>
+        </div>
+        <div class="review-card animate animate-delay-3">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-book">에베레스트 정복</div>
+          <p class="review-text">"오리지널 사진과 기록이 살아있다. 북클럽 가입이 이렇게 잘한 결정이었는지 매달 책이 올 때마다 느낀다."</p>
+          <div class="review-author">— 박 ○○, 회원 1년차</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 참여하기 -->
+  <section id="forms" style="background: #eee9e2;">
+    <div class="inner">
+      <div class="section-tag animate">Participate</div>
+      <h2 class="section-title animate">참여하기</h2>
+      <div class="forms-grid">
+        <div class="form-box animate">
+          <div class="form-section-title">독자 후기 남기기</div>
+          <form id="reviewForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>이름</label>
+                <input type="text" placeholder="이름" required>
+              </div>
+              <div class="form-group">
+                <label>읽은 책</label>
+                <select>
+                  <option value="">책 선택</option>
+                  <option>폴른 자이언츠</option>
+                  <option>에베레스트 정복</option>
+                  <option>리카르도 캐신</option>
+                  <option>일본 여성 등산사</option>
+                  <option>중국 등산 운동사</option>
+                  <option>기타</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>별점</label>
+                <select>
+                  <option>★★★★★ (5점)</option>
+                  <option>★★★★☆ (4점)</option>
+                  <option>★★★☆☆ (3점)</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>후기</label>
+                <textarea placeholder="책을 읽은 소감을 자유롭게 남겨주세요." required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="form-submit">후기 제출하기</button>
+            <div class="form-success" id="reviewSuccess">후기가 접수되었습니다. 감사합니다.</div>
+          </form>
+        </div>
+        <div class="form-box animate animate-delay-1">
+          <div class="form-section-title">번역 원서 요청하기</div>
+          <form id="requestForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>원서 제목</label>
+                <input type="text" placeholder="원서 제목" required>
+              </div>
+              <div class="form-group">
+                <label>저자</label>
+                <input type="text" placeholder="저자명">
+              </div>
+              <div class="form-group">
+                <label>출판사</label>
+                <input type="text" placeholder="출판사명">
+              </div>
+              <div class="form-group">
+                <label>원서 언어</label>
+                <select>
+                  <option value="">언어 선택</option>
+                  <option>영어</option>
+                  <option>일본어</option>
+                  <option>독일어</option>
+                  <option>프랑스어</option>
+                  <option>기타</option>
+                </select>
+              </div>
+              <div class="form-group form-full">
+                <label>요청 이유</label>
+                <textarea placeholder="이 책을 번역해주셨으면 하는 이유를 알려주세요." required></textarea>
+              </div>
+              <div class="form-group">
+                <label>이름 (선택)</label>
+                <input type="text" placeholder="이름">
+              </div>
+              <div class="form-group">
+                <label>이메일 (선택)</label>
+                <input type="email" placeholder="이메일">
+              </div>
+            </div>
+            <button type="submit" class="form-submit">요청 제출하기</button>
+            <div class="form-success" id="requestSuccess">요청이 접수되었습니다. 검토 후 반영하겠습니다.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="inner">
+      <div class="section-tag animate">FAQ</div>
+      <h2 class="section-title animate">자주 묻는 질문</h2>
+      <div class="faq-list animate">
+        <div class="faq-item">
+          <button class="faq-question">멤버십은 어떻게 가입하나요? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>멤버십 안내 섹션에서 가입 신청을 할 수 있습니다. 월 10,000원이 청구되며 연간 4~5권의 도서가 배송됩니다.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">책은 언제 받을 수 있나요? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>가입 후 순차적으로 발송됩니다. 연간 4~5회에 걸쳐 하루재가 선정한 산서가 배송됩니다. 출간 일정에 따라 배송 시기가 달라질 수 있습니다.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">어떤 기준으로 책을 선정하나요? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>단순한 등반 기록이 아닌, 산악 문화의 역사·철학·인물을 다룬 깊이 있는 책을 선정합니다. 세계 산악 문화의 지층을 한국 독자에게 전달하는 것이 기준입니다.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">언제든 해지할 수 있나요? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>네, 언제든 해지 신청이 가능합니다. 해지 후에는 다음 달부터 청구가 중단됩니다. 자세한 내용은 문의해주세요.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">기존에 출간된 책을 따로 구매할 수 있나요? <span class="faq-icon">+</span></button>
+          <div class="faq-answer"><p>네, 기존 출간 도서는 별도 구매가 가능합니다. 재고 현황 및 구매 문의는 하루재 북클럽으로 연락해주세요.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 멤버십 -->
+  <section id="membership">
+    <div class="inner">
+      <div class="section-tag animate">Membership</div>
+      <h2 class="section-title animate">멤버십 안내</h2>
+      <p class="membership-intro animate">월 10,000원으로 연간 4~5권의 산서를 받아보세요.<br>하루재가 엄선한 세계의 산서가 매년 찾아옵니다.</p>
+      <div class="membership-grid">
+        <div class="mem-card animate animate-delay-1">
+          <div class="mem-type">일반 회원</div>
+          <div class="mem-price">월 10,000원</div>
+          <div class="mem-period">연간 120,000원</div>
+          <ul class="mem-list">
+            <li>연간 4~5권의 산서 배송</li>
+            <li>권당 정가 50,000원 상당</li>
+            <li>하루재 큐레이션 도서 선정</li>
+            <li>컬러 사진 수록 고품질 도서</li>
+          </ul>
+          <a href="#" class="mem-btn">가입하기</a>
+        </div>
+        <div class="mem-card featured animate animate-delay-2">
+          <div class="mem-type">신규 가입 특전</div>
+          <div class="mem-price">첫 달 무료</div>
+          <div class="mem-period">지금 가입 시 한정 혜택</div>
+          <ul class="mem-list">
+            <li>연간 4~5권의 산서 배송</li>
+            <li>권당 정가 50,000원 상당</li>
+            <li>하루재 큐레이션 도서 선정</li>
+            <li>신규 회원 증정 도서 1권 추가</li>
+          </ul>
+          <a href="#" class="mem-btn">지금 가입하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 뉴스레터 -->
+  <section id="newsletter">
+    <div class="animate">
+      <h2 class="newsletter-title">하루재 뉴스레터 구독</h2>
+      <p class="newsletter-desc">신간 소식, 산악 문화 이야기, 번역 비하인드를 월 1회 보내드립니다.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input class="newsletter-input" type="email" placeholder="이메일 주소를 입력해주세요" required>
+        <button type="submit" class="newsletter-btn">구독하기</button>
+      </form>
+      <div class="newsletter-success" id="newsletterSuccess">구독 신청이 완료되었습니다. 감사합니다.</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">하루재 북클럽</div>
+        <div class="footer-copy">© 2026 하루재 북클럽. All rights reserved.</div>
+      </div>
+      <div>
+        <div class="footer-tagline">세계가 산에 대해 쌓아온 것들,<br>이제 한국어로.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll Animation ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+    // ── Nav shadow on scroll ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ── Counter Animation ──
+    function animateCount(el, target) {
+      let val = 0;
+      const step = target / (1800 / 16);
+      const timer = setInterval(() => {
+        val += step;
+        if (val >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
+        else el.textContent = Math.floor(val).toLocaleString();
+      }, 16);
+    }
+
+    const cntObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCount(e.target, parseInt(e.target.dataset.count));
+          cntObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => cntObserver.observe(el));
+
+    // ── Announcement Banner ──
+    function closeBanner() {
+      document.getElementById('banner').style.display = 'none';
+    }
+
+    // ── Mobile Menu ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    // ── Book Modal ──
+    document.querySelectorAll('.book-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.getElementById('modalTitle').textContent  = card.dataset.title;
+        document.getElementById('modalAuthor').textContent = card.dataset.author;
+        document.getElementById('modalDesc').textContent   = card.dataset.desc;
+        document.getElementById('modalYear').textContent   = card.dataset.year;
+        document.getElementById('modalLang').textContent   = card.dataset.lang;
+        document.getElementById('bookModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('bookModal')) closeModalBtn();
+    }
+
+    function closeModalBtn() {
+      document.getElementById('bookModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModalBtn();
+    });
+
+    // ── FAQ Accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // ── Forms ──
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('reviewSuccess').style.display = 'block';
+      this.reset();
+    });
+
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('requestSuccess').style.display = 'block';
+      this.reset();
+    });
+
+    document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('newsletterSuccess').style.display = 'block';
+      this.reset();
+    });
+  </script>
+</body>
+</html>
