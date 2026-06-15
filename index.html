@@ -747,7 +747,7 @@
 
       .books-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .modal-box { grid-template-columns: 1fr; }
-      .modal-cover { aspect-ratio: 2/1; }
+      .modal-cover { aspect-ratio: 3/4; max-height: 260px; }
       .philosophy-cols { grid-template-columns: 1fr; gap: 32px; }
       .about-grid { grid-template-columns: 1fr; gap: 32px; }
       .reviews-grid { grid-template-columns: 1fr; }
@@ -826,58 +826,83 @@
       <h2 class="section-title animate">출간 도서</h2>
       <div class="books-grid">
         <div class="book-card animate animate-delay-1"
-          data-title="폴른 자이언츠"
-          data-author="Maurice Isserman, Stewart Weaver"
-          data-desc="히말라야 8000m급 14좌를 둘러싼 등반의 역사를 집대성한 책. 19세기부터 21세기까지 전 세계 산악인들의 도전과 좌절, 그리고 승리의 기록을 담았다."
-          data-year="출간 2018" data-lang="영어 번역">
-          <div class="book-cover">표지 이미지</div>
-          <div class="book-title">폴른 자이언츠</div>
-          <div class="book-sub">히말라야 등반의 역사</div>
+          data-title="ASCENT — 크리스 보닝턴 자서전"
+          data-author="크리스 보닝턴 (Chris Bonington)"
+          data-desc="알피니즘의 살아 있는 전설, 크리스 보닝턴의 자서전. 1962년 누프체 남벽을 시작으로 안나푸르나 남벽(1970), 에베레스트 남서벽(1975) 등 수많은 등반의 역사를 담았다."
+          data-year="등반가② 시리즈 7" data-lang="영어 번역"
+          data-img="images/books/ascent.jpg">
+          <div class="book-cover"><img src="images/books/ascent.jpg" alt="ASCENT"></div>
+          <div class="book-title">ASCENT</div>
+          <div class="book-sub">크리스 보닝턴 자서전</div>
         </div>
         <div class="book-card animate animate-delay-2"
-          data-title="에베레스트 정복"
-          data-author="John Hunt"
-          data-desc="1953년 인류 최초의 에베레스트 등정을 담은 오리지널 사진집. 원정대장 존 헌트가 직접 쓴 기록과 당시의 희귀한 사진들을 수록했다."
-          data-year="출간 2017" data-lang="영어 번역">
-          <div class="book-cover">표지 이미지</div>
-          <div class="book-title">에베레스트 정복</div>
-          <div class="book-sub">초등 당시의 오리지널 기록</div>
+          data-title="프리솔로 (FREE SOLO)"
+          data-author="알렉스 호놀드 & 데이비드 로버츠"
+          data-desc="요세미티 엘 캐피탄 900미터 암벽을 로프 없이 단독 등반한 알렉스 호놀드의 이야기. 2019년 아카데미 다큐멘터리상 수상작의 원작."
+          data-year="등반가⑤ 시리즈 8" data-lang="영어 번역"
+          data-img="images/books/free-solo.jpg">
+          <div class="book-cover"><img src="images/books/free-solo.jpg" alt="프리솔로"></div>
+          <div class="book-title">프리솔로</div>
+          <div class="book-sub">알렉스 호놀드의 엘 캐피탄</div>
         </div>
         <div class="book-card animate animate-delay-3"
-          data-title="리카르도 캐신"
-          data-author="Riccardo Cassin"
-          data-desc="20세기 최고의 알피니스트 중 한 명인 리카르도 캐신의 50년 등반 인생. 워커 스퍼, 드류 필라 등 전설적인 루트를 개척한 그의 이야기를 담았다."
-          data-year="출간 2019" data-lang="이탈리아어 번역">
-          <div class="book-cover">표지 이미지</div>
-          <div class="book-title">리카르도 캐신</div>
-          <div class="book-sub">50년 등반 인생</div>
+          data-title="THE TOWER — 더 타워"
+          data-author="켈리 코르데스 (Kelly Cordes)"
+          data-desc="세로 토레 초등을 둘러싼 논란과 동반기록. 파타고니아의 최난봉 세로 토레에 얽힌 반세기의 논쟁을 파헤친다. BANFF 산악영화제 및 NOBA 2015 수상."
+          data-year="등반가② 시리즈 6" data-lang="영어 번역"
+          data-img="images/books/the-tower.jpg">
+          <div class="book-cover"><img src="images/books/the-tower.jpg" alt="THE TOWER"></div>
+          <div class="book-title">THE TOWER</div>
+          <div class="book-sub">세로 토레의 논란과 동반기록</div>
         </div>
         <div class="book-card animate animate-delay-1"
-          data-title="일본 여성 등산사"
-          data-author="—"
-          data-desc="메이지 시대부터 현대까지, 일본 여성 산악인들이 걸어온 길을 기록한 책. 여성과 산악 문화의 교차점을 조명한다."
-          data-year="출간 2020" data-lang="일본어 번역">
-          <div class="book-cover">표지 이미지</div>
-          <div class="book-title">일본 여성 등산사</div>
-          <div class="book-sub">여성 산악인의 기록</div>
+          data-title="하늘에서 추락하다"
+          data-author="라인홀드 메스너 (Reinhold Messner)"
+          data-desc="마터호른 초등의 비극. 1865년 에드워드 윔퍼의 마터호른 초등 후 하강 중 일어난 비극적 사고를 라인홀드 메스너가 재조명한다. (Absturz des Himmels)"
+          data-year="등반가② 시리즈 4" data-lang="독일어 번역"
+          data-img="images/books/sky-fall.jpg">
+          <div class="book-cover"><img src="images/books/sky-fall.jpg" alt="하늘에서 추락하다"></div>
+          <div class="book-title">하늘에서 추락하다</div>
+          <div class="book-sub">마터호른 초등의 비극</div>
         </div>
         <div class="book-card animate animate-delay-2"
-          data-title="중국 등산 운동사"
-          data-author="—"
-          data-desc="중국 근현대 산악 운동의 역사를 체계적으로 정리한 책. 중국 산악인들의 히말라야 도전과 자국 산악 문화의 발전을 다룬다."
-          data-year="출간 2021" data-lang="중국어 번역">
-          <div class="book-cover">표지 이미지</div>
-          <div class="book-title">중국 등산 운동사</div>
-          <div class="book-sub">중국 산악 운동의 역사</div>
+          data-title="마터호른의 그림자"
+          data-author="이언 스미스 (Ian Smith)"
+          data-desc="에드워드 윔퍼의 일생. Shadow of the Matterhorn — 마터호른 초등으로 영원히 기억될 에드워드 윔퍼의 파란만장한 삶을 추적한다."
+          data-year="등반가⑦ 시리즈 9" data-lang="영어 번역"
+          data-img="images/books/matterhorn.jpg">
+          <div class="book-cover"><img src="images/books/matterhorn.jpg" alt="마터호른의 그림자"></div>
+          <div class="book-title">마터호른의 그림자</div>
+          <div class="book-sub">에드워드 윔퍼의 일생</div>
         </div>
         <div class="book-card animate animate-delay-3"
+          data-title="산의 비밀"
+          data-author="쿠르트 딤베르거 (Kurt Diemberger)"
+          data-desc="8000미터의 카메라맨 쿠르트 딤베르거와 알피니즘. 브로드피크와 다울라기리 초등에 참여한 전설적 산악인이자 고산 촬영의 대가가 들려주는 산의 이야기."
+          data-year="등반가② 시리즈 5" data-lang="독일어 번역"
+          data-img="images/books/san-bimil.jpg">
+          <div class="book-cover"><img src="images/books/san-bimil.jpg" alt="산의 비밀"></div>
+          <div class="book-title">산의 비밀</div>
+          <div class="book-sub">8000미터 카메라맨의 알피니즘</div>
+        </div>
+        <div class="book-card animate animate-delay-1"
+          data-title="산책여행 (山册旅行)"
+          data-author="하루재 클럽"
+          data-desc="사람·역사·이야기를 따라 걷고 사유하고 성찰하는 알피니즘 여행. 산을 오르는 것을 넘어 산과 함께한 인간의 역사를 탐구한다."
+          data-year="하루재 클럽 시리즈" data-lang="한국어"
+          data-img="images/books/sancheck-yeohaeng.jpg">
+          <div class="book-cover"><img src="images/books/sancheck-yeohaeng.jpg" alt="산책여행"></div>
+          <div class="book-title">산책여행</div>
+          <div class="book-sub">알피니즘 인문 여행</div>
+        </div>
+        <div class="book-card animate animate-delay-2"
           data-title="그 외 도서"
           data-author="하루재 북클럽"
-          data-desc="2015년 창간 이래 총 27권의 산서를 출간했습니다. 히말라야 원정 기록, 산악 문화사, 등반 에세이 등 다양한 산서를 만나보세요."
+          data-desc="2015년 창간 이래 총 42권의 산서를 출간했습니다. 히말라야 원정 기록, 산악 문화사, 등반 에세이, 사진집 등 국내 유일의 산서 전문 출판사가 엄선한 컬렉션을 만나보세요."
           data-year="2015 —" data-lang="다수 언어 번역">
-          <div class="book-cover">+ 22권</div>
+          <div class="book-cover" style="font-size:28px; font-weight:700; color:#8a8078; letter-spacing:-0.02em;">+35</div>
           <div class="book-title">그 외 도서</div>
-          <div class="book-sub">2015년부터 총 27권 출간</div>
+          <div class="book-sub">2015년부터 총 42권 출간</div>
         </div>
       </div>
     </div>
@@ -886,7 +911,7 @@
   <!-- Book Modal -->
   <div class="modal-overlay" id="bookModal" onclick="closeModal(event)">
     <div class="modal-box">
-      <div class="modal-cover" id="modalCover">표지 이미지</div>
+      <div class="modal-cover" id="modalCover"><img id="modalImg" src="" alt="" style="display:none;"></div>
       <div class="modal-body">
         <button class="modal-close" onclick="closeModalBtn()">×</button>
         <div class="modal-tag" id="modalLang"></div>
@@ -1210,6 +1235,14 @@
         document.getElementById('modalDesc').textContent   = card.dataset.desc;
         document.getElementById('modalYear').textContent   = card.dataset.year;
         document.getElementById('modalLang').textContent   = card.dataset.lang;
+        const imgEl = document.getElementById('modalImg');
+        if (card.dataset.img) {
+          imgEl.src = card.dataset.img;
+          imgEl.alt = card.dataset.title;
+          imgEl.style.display = 'block';
+        } else {
+          imgEl.style.display = 'none';
+        }
         document.getElementById('bookModal').classList.add('open');
         document.body.style.overflow = 'hidden';
       });
