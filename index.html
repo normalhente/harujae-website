@@ -374,6 +374,16 @@
 
     .book-card:hover .book-cover img { transform: scale(1.04); }
 
+    .book-cover-noimg {
+      background: linear-gradient(160deg, var(--dark) 0%, #2a3d30 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    }
+    .book-cover-noimg::before {
+      content: '⛰';
+      font-size: 36px;
+      opacity: 0.35;
+    }
+
     /* 카라비너 — 찜하기 */
     .carabiner-btn {
       position: absolute; top: 10px; left: 10px;
@@ -1126,6 +1136,116 @@
           <div class="book-cover">
             <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
             <img src="images/books/20-산의비밀.jpg" alt="산의 비밀"><div class="book-hover-info"><div class="book-hover-title">산의 비밀</div><div class="book-hover-sub">8000미터 카메라맨의 알피니즘</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="산의 전사들" data-author="버나데트 맥도널드 (Bernadette McDonald)" data-desc="캐나다 로키의 알피니스트들이 히말라야 고봉에 도전하는 이야기. 경량·속공 등반의 선구자들이 펼치는 짜릿한 등반 이야기. (Alpine Warriors)" data-year="등반사 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">산의 전사들</div><div class="book-hover-sub">Alpine Warriors</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="태양의 한조각" data-author="오이시 아키히로 (大石明弘)" data-desc="일본 최고의 알피니스트 오이시 아키히로의 등반 인생. 알프스에서 히말라야까지, 태양처럼 타오르는 산악인의 삶을 담은 자서전. (太陽のかけら)" data-year="등반가 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">태양의 한조각</div><div class="book-hover-sub">太陽のかけら</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="카트린 데스티벨" data-author="카트린 데스티벨 (Catherine Destivelle)" data-desc="세계 최고의 여성 암벽등반가 카트린 데스티벨의 자서전. 프랑스 파리 소녀가 세계 암벽등반의 여왕이 되기까지의 파란만장한 이야기. (Rock Queen)" data-year="등반가 시리즈" data-lang="프랑스어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">카트린 데스티벨</div><div class="book-hover-sub">Rock Queen</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="에베레스트 솔로" data-author="라인홀드 메스너 (Reinhold Messner)" data-desc="1980년 몬순 시즌, 무산소·무팀으로 에베레스트 단독 등정에 성공한 메스너의 기록. 인류 등반 역사상 가장 대담한 도전 중 하나. (하루재 회원 배포)" data-year="등반기 시리즈" data-lang="독일어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">에베레스트 솔로</div><div class="book-hover-sub">메스너 단독 등정 기록</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="Art of Freedom" data-author="버나데트 맥도널드 (Bernadette McDonald)" data-desc="폴란드 알피니즘의 전설 보이텍 쿠르티카의 생애와 등반 철학. 자유를 향한 예술적 등반의 경지를 탐구한 BANFF 수상작. (Art of Freedom)" data-year="등반가 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">Art of Freedom</div><div class="book-hover-sub">보이텍 쿠르티카의 등반 철학</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="아득한 산들" data-author="이즈미 세이치 (泉靖一)" data-desc="일본 산악 탐험의 선구자 이즈미 세이치가 안데스·히말라야·극지를 누비며 기록한 탐험 에세이. 인간과 자연의 본질에 대한 깊은 성찰." data-year="탐구기 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">아득한 산들</div><div class="book-hover-sub">탐험가 이즈미 세이치의 산악 에세이</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="WINTER 8000" data-author="버나데트 맥도널드 (Bernadette McDonald)" data-desc="히말라야 8000m 14좌 동계 초등의 역사. 혹한과 폭풍 속에서 불굴의 의지로 정상에 선 산악인들의 이야기. 2021년 세종도서 선정." data-year="등반사 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">WINTER 8000</div><div class="book-hover-sub">히말라야 동계 등반의 역사</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="클라이머를 위한 1001가지 팁" data-author="앤디 커크패트릭 (Andy Kirkpatrick)" data-desc="세계적인 빅월 클라이머 앤디 커크패트릭이 전하는 암벽등반의 모든 것. 초보부터 전문가까지 현장에서 바로 쓸 수 있는 실전 팁 1001가지. (1001 Climbing Tips)" data-year="기술서 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">클라이머를 위한 1001가지 팁</div><div class="book-hover-sub">1001 Climbing Tips</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="정당화할 수 없는 위험?" data-author="사이먼 톰슨 (Simon Thompson)" data-desc="영국 등산 200년의 역사를 집대성. 신사 스포츠로 시작해 극한의 모험으로 발전한 영국 산악문화의 빛과 그림자. (Unjustifiable Risk?)" data-year="등반사 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">정당화할 수 없는 위험?</div><div class="book-hover-sub">영국 등산 200년사</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="지옥은 나를 원하지 않았다" data-author="리우시 코르트코 · 마르친 피에트라셰프스키" data-desc="폴란드 얼음의 전사 크시슈토프 비엘리츠키의 전기. 8000m 14좌 완등과 수많은 동계 초등을 이룬 철인 알피니스트의 불굴의 인생. 2022년 세종도서 선정." data-year="등반가 시리즈" data-lang="폴란드어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">지옥은 나를 원하지 않았다</div><div class="book-hover-sub">폴란드 얼음의 전사 비엘리츠키</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="히말라야 — 다울라기리 산군의 탐사기" data-author="박철암" data-desc="한국 산악계의 원로 박철암이 기록한 다울라기리 산군 탐사의 생생한 현장. 히말라야의 미지 지형을 누빈 한국 산악인들의 도전 기록." data-year="탐구기 시리즈" data-lang="한국어" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">히말라야</div><div class="book-hover-sub">다울라기리 산군의 탐사기</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="버티컬 마인드" data-author="돈 맥그랠스 · 제프 엘리슨" data-desc="암벽등반을 위한 심리학적 접근. 두려움 극복, 집중력 향상, 정신적 한계 돌파를 위한 과학적 훈련법을 담은 등반 심리학의 필독서. (Vertical Mind)" data-year="기술서 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">버티컬 마인드</div><div class="book-hover-sub">등반을 위한 심리학적 접근</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="산 그 4차원의 세계" data-author="라인홀드 메스너 외" data-desc="메스너가 편집한 산악 문학·사진·예술의 정수. 산을 단순한 지형이 아닌 4차원적 경험의 공간으로 바라보는 시선이 담긴 묵직한 앤솔로지." data-year="기타 시리즈" data-lang="독일어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">산 그 4차원의 세계</div><div class="book-hover-sub">라인홀드 메스너 외</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="산악만화·소설·영화 계보" data-author="가모 (GAMO)" data-desc="산악 문화를 만화·소설·영화라는 렌즈로 추적하는 독보적인 문화사. 일본 산악 만화의 거장 가모가 정리한 산악 대중문화의 계보." data-year="기타 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">산악만화·소설·영화 계보</div><div class="book-hover-sub">GAMO 산악 대중문화사</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="캠프4" data-author="스티브 로퍼 (Steve Roper)" data-desc="요세미티 엘 캐피탄의 전설이 시작된 캠프4. 1950~70년대 요세미티 황금기를 살았던 클라이머들의 생생한 회고록. (Camp 4: Recollections of a Yosemite Rockclimber)" data-year="등반기 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">캠프4</div><div class="book-hover-sub">요세미티 황금기의 회고록</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="재미있는 성공률 30%" data-author="야마노이 야스시 (山野井泰史)" data-desc="일본 최고의 알피니스트 야마노이 야스시의 등반론. 성공 확률 30%의 루트에 도전하는 이유, 그 속에서 발견한 삶의 의미를 담은 에세이." data-year="등반가 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">재미있는 성공률 30%</div><div class="book-hover-sub">야마노이 야스시의 등반론</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="북조선의 산" data-author="이야마 다쓰오 (飯山達雄)" data-desc="베일에 싸인 북한의 산을 직접 탐사한 일본 산악인의 기록. 백두산에서 관모봉까지, 한반도 최고봉들의 실체를 담은 희귀한 등반·탐험 보고서." data-year="탐구기 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">북조선의 산</div><div class="book-hover-sub">한반도 최고봉 탐사기</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="터칭더보이드" data-author="조 심프슨 (Joe Simpson)" data-desc="1985년 페루 안데스에서 벌어진 생사의 갈림길. 파트너에게 로프를 끊긴 채 빙하 크레바스에 추락한 조 심프슨의 기적적인 생환기. (Touching the Void, 하루재 회원 배포)" data-year="등반기 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">터칭더보이드</div><div class="book-hover-sub">Touching the Void</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="게리 헤밍" data-author="미렐라 텐데리니 (Mirella Tenderini)" data-desc="1960년대 요세미티와 알프스를 종횡무진한 전설의 등반가 게리 헤밍의 짧고 강렬한 삶. 자유와 방랑, 광기의 경계를 걸었던 아웃사이더의 초상. (Gary Hemming)" data-year="등반가 시리즈" data-lang="이탈리아어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">게리 헤밍</div><div class="book-hover-sub">자유로운 영혼의 클라이머</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-1" data-title="What's Next?" data-author="히라이데 카즈야 (平出和也)" data-desc="피오렐레트 황금피켈상 수상자 히라이데 카즈야가 탐구하는 미지의 루트. 다음 목표를 향해 끊임없이 나아가는 일본 최고의 알피니스트가 담은 등반 철학." data-year="등반가 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">What's Next?</div><div class="book-hover-sub">히라이데 카즈야의 등반 철학</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-2" data-title="떠오르는 히말라야의 영웅들" data-author="버나데트 맥도널드 (Bernadette McDonald)" data-desc="네팔·파키스탄 등 히말라야 현지 출신 산악인들의 약진을 기록한 책. 셰르파를 넘어 자신의 이름으로 등반에 나선 새로운 세대의 이야기. (Alpine Rising)" data-year="등반사 시리즈" data-lang="영어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">떠오르는 히말라야의 영웅들</div><div class="book-hover-sub">Alpine Rising</div></div></div>
+        </div>
+        <div class="book-card animate animate-delay-3" data-title="일러스트 클라이밍" data-author="아베 료슈 (阿部亮樹)" data-desc="등반 기술을 정밀한 일러스트로 해설한 실용 가이드. 초급 동작부터 고급 기술까지, 눈으로 배우는 가장 아름다운 등반 교과서. (イラスト・クライミング)" data-year="기술서 시리즈" data-lang="일본어 번역" data-img="">
+          <div class="book-cover book-cover-noimg">
+            <button class="carabiner-btn" type="button" aria-label="찜하기"><svg class="carabiner-svg" viewBox="0 0 20 26"><rect x="4" y="2" width="11" height="22" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="carabiner-gate" x1="4" y1="6" x2="4" y2="20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+            <div class="book-hover-info"><div class="book-hover-title">일러스트 클라이밍</div><div class="book-hover-sub">イラスト・クライミング</div></div></div>
         </div>
       </div>
     </div>
