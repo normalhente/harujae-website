@@ -622,10 +622,22 @@
       margin-top: auto;
     }
 
+    .modal-buy-wrap {
+      margin-top: 20px;
+    }
+
+    .modal-buy-label {
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
     .modal-buy {
       display: flex;
       gap: 8px;
-      margin-top: 16px;
     }
 
     .modal-buy-btn {
@@ -1650,9 +1662,12 @@
         <p class="modal-desc" id="modalDesc"></p>
         <div class="modal-tags" id="modalTags"></div>
         <div class="modal-meta" id="modalYear"></div>
-        <div class="modal-buy" id="modalBuy" style="display:none;">
-          <a id="modalBtnYes24" href="" target="_blank" rel="noopener noreferrer" class="modal-buy-btn">예스24</a>
-          <a id="modalBtnKyobo" href="" target="_blank" rel="noopener noreferrer" class="modal-buy-btn">교보문고</a>
+        <div class="modal-buy-wrap" id="modalBuy" style="display:none;">
+          <div class="modal-buy-label">구매처</div>
+          <div class="modal-buy">
+            <a id="modalBtnYes24" href="" target="_blank" rel="noopener noreferrer" class="modal-buy-btn">예스24</a>
+            <a id="modalBtnKyobo" href="" target="_blank" rel="noopener noreferrer" class="modal-buy-btn">교보문고</a>
+          </div>
         </div>
       </div>
     </div>
@@ -2146,7 +2161,7 @@
         const yes24El = document.getElementById('modalBtnYes24');
         const kyoboEl = document.getElementById('modalBtnKyobo');
         if (card.dataset.yes24 || card.dataset.kyobo) {
-          buyEl.style.display = 'flex';
+          buyEl.style.display = 'block';
           yes24El.style.display = card.dataset.yes24 ? '' : 'none';
           if (card.dataset.yes24) yes24El.href = card.dataset.yes24;
           kyoboEl.style.display = card.dataset.kyobo ? '' : 'none';
