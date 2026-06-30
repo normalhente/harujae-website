@@ -238,6 +238,23 @@
       min-height: calc(100vh - 64px);
       display: flex;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-kanji {
+      position: absolute;
+      right: -2vw;
+      bottom: -8vh;
+      font-size: clamp(280px, 38vw, 560px);
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.045;
+      font-family: 'Apple SD Gothic Neo', 'Noto Serif KR', Georgia, serif;
+      font-weight: 900;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
     }
 
     .hero-label {
@@ -1733,6 +1750,7 @@
 
   <!-- Hero -->
   <section id="hero">
+    <div class="hero-kanji" aria-hidden="true">山</div>
     <div class="inner">
       <div class="hero-label">하루재클럽</div>
       <h1 class="hero-title"><span class="title-line">세계가 산에 대해</span><span class="title-line">쌓아온 것들,</span><span class="title-line">이제 한국어로.</span></h1>
